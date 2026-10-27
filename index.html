@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wickwing Privacy Policy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Figtree:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+  /* Layout: one reading column, a small lantern mark in the header, one set-off summary, then plain sections. */
+  :root {
+    --bg: #f4f5f8;
+    --surface: #ffffff;
+    --ink: #1c2133;
+    --muted: #5a6075;
+    --rule: #dcdfe8;
+    --flame: #a8620d;
+    --flame-soft: #f6e7cf;
+    --display: "Marcellus", "Palatino Linotype", Palatino, Georgia, serif;
+    --body: "Figtree", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #11142a; --surface: #191d38; --ink: #e8e5dc; --muted: #a3a6b8;
+      --rule: #2c3152; --flame: #f2b24c; --flame-soft: #2a2740; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #11142a; --surface: #191d38; --ink: #e8e5dc; --muted: #a3a6b8;
+    --rule: #2c3152; --flame: #f2b24c; --flame-soft: #2a2740; color-scheme: dark;
+  }
+  body { margin: 0;
+    background: var(--bg); color: var(--ink); font-family: var(--body);
+    font-size: 1.0625rem; line-height: 1.65;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 2.5rem 4rem;
+  }
+  main { max-width: 40rem; margin: 0 auto; display: grid; gap: 2.25rem; }
+  header { display: grid; gap: 0.75rem; }
+  .brand { display: flex; align-items: center; gap: 0.75rem; }
+  .brand svg { width: 2.25rem; height: 2.25rem; flex: none; }
+  .brand span { font-family: var(--display); font-size: 1.15rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  h1 { font-family: var(--display); font-weight: 400; font-size: clamp(2rem, 6vw, 2.75rem); line-height: 1.15; margin: 0; text-wrap: balance; }
+  .meta { color: var(--muted); font-size: 0.95rem; margin: 0; }
+  nav { display: flex; gap: 1.25rem; font-size: 0.95rem; }
+  a { color: var(--flame); text-underline-offset: 0.2em; }
+  a:focus-visible { outline: 2px solid var(--flame); outline-offset: 3px; border-radius: 2px; }
+  .summary {
+    background: var(--flame-soft); border-radius: 10px; padding: 1.25rem 1.4rem;
+    display: grid; gap: 0.5rem;
+  }
+  .summary p { margin: 0; }
+  .summary strong { font-weight: 600; }
+  section { display: grid; gap: 0.6rem; min-width: 0; }
+  h2 { font-family: var(--display); font-weight: 400; font-size: 1.45rem; margin: 0; text-wrap: balance; }
+  h3 { font-size: 1rem; font-weight: 600; margin: 0.4rem 0 0; }
+  p, ul { margin: 0; }
+  ul { padding-left: 1.2rem; display: grid; gap: 0.35rem; }
+  .lang { border-top: 1px solid var(--rule); padding-top: 2.25rem; display: grid; gap: 2.25rem; }
+  .eyebrow { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin: 0; }
+  .contact { display: grid; gap: 0.25rem; }
+  .contact code { font-family: var(--body); font-size: 1.05rem; user-select: all; color: var(--ink); }
+  footer { color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--rule); padding-top: 1.25rem; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="brand">
+      <svg viewBox="0 0 36 36" aria-hidden="true">
+        <path d="M18 4c2.6 3.4 4 6.1 4 8.2a4 4 0 0 1-8 0c0-2.1 1.4-4.8 4-8.2z" fill="var(--flame)"/>
+        <rect x="16.8" y="15" width="2.4" height="6" rx="1.2" fill="var(--muted)"/>
+        <path d="M17 21c-5-4.5-11-4-13-1 2 4.2 7.6 5.6 13 3.2zM19 21c5-4.5 11-4 13-1-2 4.2-7.6 5.6-13 3.2z" fill="var(--muted)" opacity=".55"/>
+        <rect x="10" y="27" width="16" height="2.4" rx="1.2" fill="var(--muted)"/>
+      </svg>
+      <span>Wickwing</span>
+    </div>
+    <h1>Privacy Policy</h1>
+    <p class="meta">Effective 27 October 2026 · Developer: Ali Alperen Karaca</p>
+    <nav aria-label="Language"><a href="#en">English</a><a href="#tr">Türkçe</a></nav>
+  </header>
+
+  <div class="summary" role="note">
+    <p><strong>In short:</strong> Wickwing does not collect, sell or share your personal data. There are no accounts, no ads and no tracking.</p>
+    <p lang="tr"><strong>Kısaca:</strong> Wickwing kişisel verini toplamaz, satmaz ya da paylaşmaz. Hesap, reklam ve takip yoktur.</p>
+  </div>
+
+  <div id="en" class="lang" lang="en">
+    <p class="eyebrow">English</p>
+
+    <section>
+      <h2>What stays on your device</h2>
+      <p>The game saves your progress on your device: completed levels, medallions, best times and settings such as sound and haptics. This file never leaves your device, except inside the backups your iPhone or iPad makes to iCloud or a computer under Apple's own terms. Deleting the app deletes your progress.</p>
+    </section>
+
+    <section>
+      <h2>What we do not collect</h2>
+      <ul>
+        <li>No names, email addresses, phone numbers or contacts.</li>
+        <li>No location, photos, camera or microphone access.</li>
+        <li>No advertising identifier and no cross-app tracking.</li>
+        <li>No analytics or advertising SDKs, and no servers of our own.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Third parties</h2>
+      <h3>Unity</h3>
+      <p>Wickwing is built with the Unity engine. The Unity runtime can send limited, anonymous technical information about the device (such as device model, operating system version and graphics hardware) to Unity Technologies so they can improve the engine. It does not include your name, contacts or game progress. See <a href="https://unity.com/legal/privacy-policy" rel="noopener">Unity's privacy policy</a>.</p>
+      <h3>Apple</h3>
+      <p>If you test Wickwing through TestFlight, Apple collects crash reports, device information and any feedback or screenshots you choose to send, under <a href="https://www.apple.com/legal/privacy/" rel="noopener">Apple's privacy policy</a> and the TestFlight terms. We see only what Apple passes on to developers. If the game later offers an in-app purchase, Apple processes the payment; we never receive your payment details.</p>
+    </section>
+
+    <section>
+      <h2>Children</h2>
+      <p>Wickwing is made for players of all ages. It does not knowingly collect personal information from anyone, including children under 13.</p>
+    </section>
+
+    <section>
+      <h2>Changes</h2>
+      <p>If this policy changes, we will update this page and its effective date.</p>
+    </section>
+
+    <section class="contact">
+      <h2>Contact</h2>
+      <p>Questions about privacy in Wickwing:</p>
+      <code>alperenkaraca@msn.com</code>
+    </section>
+  </div>
+
+  <div id="tr" class="lang" lang="tr">
+    <p class="eyebrow">Türkçe</p>
+
+    <section>
+      <h2>Cihazında kalanlar</h2>
+      <p>Oyun ilerlemeni cihazına kaydeder: bitirdiğin bölümler, madalyonlar, en iyi süreler ve ses, titreşim gibi ayarlar. Bu dosya, iPhone ya da iPad'inin Apple'ın kendi koşullarıyla iCloud'a veya bilgisayara aldığı yedekler dışında cihazından çıkmaz. Uygulamayı silersen ilerlemen de silinir.</p>
+    </section>
+
+    <section>
+      <h2>Toplamadıklarımız</h2>
+      <ul>
+        <li>Ad, e-posta, telefon numarası ya da rehber yok.</li>
+        <li>Konum, fotoğraf, kamera ya da mikrofon erişimi yok.</li>
+        <li>Reklam kimliği ve uygulamalar arası takip yok.</li>
+        <li>Analiz ya da reklam SDK'sı yok, kendi sunucumuz yok.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Üçüncü taraflar</h2>
+      <h3>Unity</h3>
+      <p>Wickwing, Unity oyun motoruyla yapıldı. Unity'nin çalışma ortamı motoru geliştirmek için cihaz hakkında sınırlı ve anonim teknik bilgiyi (cihaz modeli, işletim sistemi sürümü, grafik donanımı gibi) Unity Technologies'e gönderebilir. Bu bilgi adını, rehberini ya da oyun ilerlemeni içermez. Ayrıntı için <a href="https://unity.com/legal/privacy-policy" rel="noopener">Unity'nin gizlilik politikası</a>.</p>
+      <h3>Apple</h3>
+      <p>Wickwing'i TestFlight ile deniyorsan Apple, <a href="https://www.apple.com/legal/privacy/" rel="noopener">Apple'ın gizlilik politikası</a> ve TestFlight koşulları çerçevesinde çökme raporlarını, cihaz bilgisini ve göndermeyi seçtiğin geri bildirim ile ekran görüntülerini toplar. Biz yalnızca Apple'ın geliştiricilere ilettiğini görürüz. Oyun ileride uygulama içi satın alma sunarsa ödemeyi Apple işler; ödeme bilgilerin bize hiç ulaşmaz.</p>
+    </section>
+
+    <section>
+      <h2>Çocuklar</h2>
+      <p>Wickwing her yaştan oyuncu için yapıldı. 13 yaş altı çocuklar dahil kimseden bilerek kişisel bilgi toplamaz.</p>
+    </section>
+
+    <section>
+      <h2>Değişiklikler</h2>
+      <p>Bu politika değişirse bu sayfayı ve yürürlük tarihini güncelleriz.</p>
+    </section>
+
+    <section class="contact">
+      <h2>İletişim</h2>
+      <p>Wickwing'de gizlilikle ilgili soruların için:</p>
+      <code>alperenkaraca@msn.com</code>
+    </section>
+  </div>
+
+  <footer>© 2026 Ali Alperen Karaca · Wickwing</footer>
+</main>
+</body>
+</html>
