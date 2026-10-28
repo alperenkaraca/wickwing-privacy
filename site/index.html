@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wickwing — A Lamplighter's Run</title>
+<meta name="description" content="Wickwing for iPhone and iPad: run, leap, glide and zip as Tallow, a small lantern-moth courier, through five storybook worlds to relight the Great Lantern.">
+<meta name="theme-color" content="#11142a">
+<meta property="og:title" content="Wickwing — A Lamplighter's Run">
+<meta property="og:description" content="Run, leap, glide and zip through five storybook worlds and relight the Great Lantern.">
+<meta property="og:image" content="media/hero-poster.jpg">
+<link rel="icon" type="image/png" href="img/icon.png">
+<link rel="apple-touch-icon" href="img/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Figtree:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+  /* Layout: a full-bleed hero (muted gameplay loop, the logo, one call to action), then the story, the screenshots in a
+     swipeable strip, the five worlds as cards, and the support desk on paper. Night navy and lantern flame, like the game. */
+  :root {
+    --night: #11142a;
+    --night-2: #191d38;
+    --night-3: #232848;
+    --cream: #efe6d2;
+    --muted: #b3b2c2;
+    --flame: #f2b24c;
+    --flame-deep: #a8620d;
+    --brass: #c8923a;
+    --brass-light: #e8c170;
+    --paper: #f3e3c3;
+    --paper-edge: #e2cda4;
+    --ink: #2a1a24;
+    --ink-soft: #5b4650;
+    --display: "Marcellus", "Palatino Linotype", Palatino, Georgia, serif;
+    --body: "Figtree", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --gutter: max(16px, env(safe-area-inset-left, 0px));
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; background: var(--night); color: var(--cream); font-family: var(--body);
+    font-size: 1.0625rem; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  img, video { display: block; max-width: 100%; }
+  a { color: var(--flame); text-underline-offset: 0.2em; }
+  a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--flame); outline-offset: 3px; border-radius: 4px; }
+  .wrap { width: min(72rem, 100% - 2 * var(--gutter)); margin-inline: auto; }
+
+  /* Language: both languages are in the page; html[data-lang] shows one (no script: English). */
+  html[data-lang="en"] [lang="tr"]:not(html), html[data-lang="tr"] [lang="en"]:not(html) { display: none !important; }
+
+  /* ---------- top bar */
+  .bar {
+    position: absolute; inset: 0 0 auto 0; z-index: 3;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding: max(14px, env(safe-area-inset-top, 0px)) var(--gutter) 14px;
+  }
+  .bar nav { display: flex; gap: 1.25rem; font-size: 0.95rem; }
+  .bar nav a { color: var(--cream); text-decoration: none; opacity: 0.9; }
+  .bar nav a:hover { opacity: 1; text-decoration: underline; }
+  .lang-toggle { display: inline-flex; border: 1px solid rgba(239, 230, 210, 0.45); border-radius: 999px; overflow: hidden; }
+  .lang-toggle button {
+    font: 600 0.8rem/1 var(--body); letter-spacing: 0.08em; color: var(--cream); background: transparent;
+    border: 0; padding: 0.5rem 0.75rem; cursor: pointer;
+  }
+  .lang-toggle button[aria-pressed="true"] { background: var(--cream); color: var(--night); }
+
+  /* ---------- hero */
+  .hero {
+    position: relative; min-height: min(100svh, 62rem); display: grid; place-items: center; overflow: hidden;
+    background: var(--night) url("media/hero-poster.jpg") 42% 50% / cover no-repeat; isolation: isolate;
+  }
+  .hero video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 42% 50%; z-index: -2; }
+  .hero::after {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background:
+      radial-gradient(ellipse 70% 55% at 50% 45%, rgba(17, 20, 42, 0.55), rgba(17, 20, 42, 0.15) 70%),
+      linear-gradient(to bottom, rgba(17, 20, 42, 0.55), rgba(17, 20, 42, 0) 22%, rgba(17, 20, 42, 0) 62%, var(--night));
+  }
+  @media (prefers-reduced-motion: reduce) { .hero video { display: none; } }
+  .hero-inner { text-align: center; padding: 7rem var(--gutter) 5rem; display: grid; justify-items: center; gap: 1.1rem; }
+  .logo-wrap { margin: 0; position: relative; }
+  .logo-wrap::before {
+    /* the lamp glow of the title screen, behind the wick's flame (the I) */
+    content: ""; position: absolute; left: 13%; top: -30%; width: 34%; aspect-ratio: 1; transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(255, 217, 138, 0.42), rgba(255, 217, 138, 0) 68%); pointer-events: none;
+  }
+  .logo { position: relative; width: min(42rem, 88vw); height: auto; filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.45)); }
+  .logo-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .tagline {
+    margin: 0; font-family: var(--display); font-size: clamp(1.15rem, 3.2vw, 1.7rem); letter-spacing: 0.06em;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6); text-wrap: balance;
+  }
+  .cta-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-top: 0.6rem; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.55rem; font: 700 1.05rem/1 var(--body); letter-spacing: 0.02em;
+    padding: 0.95rem 1.5rem; border-radius: 999px; text-decoration: none; color: #3a2410;
+    background: linear-gradient(to bottom, var(--brass-light), var(--brass)); border: 2px solid var(--ink);
+    box-shadow: inset 0 2px 0 rgba(255, 248, 232, 0.55), 0 6px 18px rgba(0, 0, 0, 0.35);
+  }
+  .btn:hover { filter: brightness(1.06); }
+  .btn svg { width: 1.15em; height: 1.15em; }
+  .btn-ghost { background: rgba(17, 20, 42, 0.55); color: var(--cream); border-color: rgba(239, 230, 210, 0.6); box-shadow: none; }
+  .cta-note { margin: 0; font-size: 0.9rem; color: var(--muted); text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7); }
+
+  /* ---------- sections */
+  section { padding: clamp(3.5rem, 8vw, 6rem) 0; }
+  .eyebrow { margin: 0 0 0.5rem; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--flame); }
+  h2 { margin: 0 0 1rem; font-family: var(--display); font-weight: 400; font-size: clamp(1.9rem, 5vw, 2.8rem); line-height: 1.15; text-wrap: balance; }
+  h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 1.45rem; line-height: 1.2; }
+  p { margin: 0; }
+  .lede { max-width: 44rem; font-size: clamp(1.05rem, 2.2vw, 1.2rem); color: var(--cream); }
+  .lede + .lede { margin-top: 1rem; }
+  .facts { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.75rem; padding: 0; list-style: none; }
+  .facts li { border: 1px solid var(--night-3); background: var(--night-2); border-radius: 999px; padding: 0.4rem 0.9rem; font-size: 0.92rem; color: var(--muted); }
+
+  /* screenshots: a swipeable strip that never widens the page */
+  .shots {
+    display: grid; grid-auto-flow: column; grid-auto-columns: min(46rem, 86%); gap: 1rem;
+    overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+    padding: 0.25rem var(--gutter) 1rem; margin: 0; list-style: none; scrollbar-width: thin; scrollbar-color: var(--night-3) transparent;
+  }
+  .shots li { scroll-snap-align: center; }
+  .shots img { width: 100%; height: auto; aspect-ratio: 2868 / 1320; border-radius: 14px; border: 1px solid var(--night-3); background: var(--night-2); }
+  .shots-hint { margin-top: 0.5rem; font-size: 0.9rem; color: var(--muted); }
+
+  /* worlds */
+  .worlds { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fill, minmax(min(19rem, 100%), 1fr)); margin: 1.5rem 0 0; padding: 0; list-style: none; }
+  .world { background: var(--night-2); border: 1px solid var(--night-3); border-radius: 16px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; }
+  .world img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+  .world div { padding: 1.1rem 1.2rem 1.3rem; display: grid; gap: 0.45rem; align-content: start; }
+  .world .num { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--flame); font-weight: 600; }
+  .world p { color: var(--muted); font-size: 0.98rem; }
+  .world .move { color: var(--cream); font-size: 0.92rem; }
+  .world.finale { border-color: rgba(242, 178, 76, 0.45); }
+
+  /* support desk: the game's paper panel */
+  .support { background: var(--paper); color: var(--ink); background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 30%, rgba(160, 120, 70, 0.08)); }
+  .support .eyebrow { color: var(--flame-deep); }
+  .support a { color: var(--flame-deep); }
+  .support-grid { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr)); align-items: start; }
+  .contact { display: grid; gap: 0.6rem; }
+  .contact .mail { font-size: 1.2rem; font-weight: 700; word-break: break-all; }
+  .contact p { color: var(--ink-soft); }
+  .faq { display: grid; gap: 0.6rem; }
+  details { background: rgba(255, 255, 255, 0.45); border: 1px solid var(--paper-edge); border-radius: 12px; padding: 0.15rem 1rem; }
+  summary { cursor: pointer; font-weight: 700; padding: 0.8rem 0; list-style-position: outside; }
+  details p, details ol { color: var(--ink-soft); padding-bottom: 0.9rem; margin: 0; }
+  details ol { padding-left: 1.2rem; }
+
+  footer { padding: 2.25rem 0 calc(2.25rem + env(safe-area-inset-bottom, 0px)); color: var(--muted); font-size: 0.92rem; }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; justify-content: space-between; }
+  footer nav { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+
+  @media (max-width: 40rem) {
+    .bar nav { display: none; }
+    .hero-inner { padding-top: 6rem; }
+    .btn { padding: 0.85rem 1.25rem; }
+  }
+</style>
+<noscript><style>html[data-lang="en"] [lang="tr"]:not(html) { display: revert !important; } .lang-toggle { display: none; }</style></noscript>
+</head>
+<body>
+
+<header class="hero" id="top">
+  <div class="bar">
+    <div class="lang-toggle" role="group" aria-label="Language / Dil">
+      <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-set-lang="tr" aria-pressed="false">TR</button>
+    </div>
+    <nav aria-label="Sections">
+      <a href="#worlds" lang="en">Worlds</a><a href="#worlds" lang="tr">Dünyalar</a>
+      <a href="#screens" lang="en">Screenshots</a><a href="#screens" lang="tr">Ekranlar</a>
+      <a href="#support" lang="en">Support</a><a href="#support" lang="tr">Destek</a>
+    </nav>
+  </div>
+
+  <video autoplay muted loop playsinline preload="auto" poster="media/hero-poster.jpg" aria-hidden="true" tabindex="-1">
+    <source src="media/hero.mp4" type="video/mp4">
+  </video>
+
+  <div class="hero-inner">
+    <h1 class="logo-wrap">
+      <img class="logo" src="img/logo.png" width="1600" height="470" alt="Wickwing">
+    </h1>
+    <p class="tagline" lang="en">A lamplighter's run to relight the Great Lantern</p>
+    <p class="tagline" lang="tr">Büyük Fener'i yeniden yakmak için bir fenercinin koşusu</p>
+    <div class="cta-row">
+      <!-- Public TestFlight invite; swap for the App Store link at launch. -->
+      <a class="btn" href="https://testflight.apple.com/join/HsV7mh1r" data-store-link>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.9-1.7 0-3.3 1-4.2 2.5-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.9-1.1-2.9-4.2zM13.9 5.2c.7-.8 1.2-2 1-3.2-1 0-2.2.7-3 1.5-.6.7-1.2 1.9-1.1 3.1 1.2.1 2.3-.6 3.1-1.4z"/></svg>
+        <span lang="en">Join the TestFlight beta</span><span lang="tr">TestFlight betasına katıl</span>
+      </a>
+      <a class="btn btn-ghost" href="#screens"><span lang="en">See the game</span><span lang="tr">Oyunu gör</span></a>
+    </div>
+    <p class="cta-note" lang="en">For iPhone and iPad · Coming to the App Store</p>
+    <p class="cta-note" lang="tr">iPhone ve iPad için · Yakında App Store'da</p>
+  </div>
+</header>
+
+<main>
+  <section id="story">
+    <div class="wrap">
+      <p class="eyebrow" lang="en">The story</p><p class="eyebrow" lang="tr">Hikâye</p>
+      <h2 lang="en">The night the Great Lantern went out</h2>
+      <h2 lang="tr">Büyük Fener'in söndüğü gece</h2>
+      <p class="lede" lang="en">The Snuff, a creature of smoke, blew out the Great Lantern on the clockwork spire, and the valley of Hollowmere went dark. Its five Beacon Embers lie scattered across the lands. Tallow, the smallest courier of the Lamplighters' Guild, carries a stubborn little lantern of her own, and she is going to bring them home.</p>
+      <p class="lede" lang="tr">Dumandan bir yaratık olan Snuff, saat işi kulenin tepesindeki Büyük Fener'i söndürdü ve Hollowmere vadisi karanlığa gömüldü. Beş Işık Közü dört bir yana dağıldı. Fenerciler Loncası'nın en küçük ulağı Tallow, sönmeyi reddeden küçük bir fener taşıyor ve onları eve getirecek.</p>
+      <p class="lede" lang="en">Tallow runs on her own. Tap to jump, hold for a higher leap, swipe down to slide, and hold the left side of the screen to skid to a stop and wait for the right moment.</p>
+      <p class="lede" lang="tr">Tallow kendi kendine koşar. Zıplamak için dokun, daha yükseğe sıçramak için basılı tut, kaymak için aşağı kaydır; durup doğru anı beklemek için ekranın solunu basılı tut.</p>
+      <ul class="facts" lang="en">
+        <li>5 worlds · 30 levels</li><li>3 hidden medallions per level</li><li>Original music for every world</li><li>No ads, no accounts, no tracking</li><li>Plays offline</li>
+      </ul>
+      <ul class="facts" lang="tr">
+        <li>5 dünya · 30 bölüm</li><li>Her bölümde 3 saklı madalyon</li><li>Her dünyaya özel müzik</li><li>Reklam, hesap ve takip yok</li><li>İnternetsiz oynanır</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="screens" style="padding-top:0">
+    <div class="wrap">
+      <p class="eyebrow" lang="en">Screenshots</p><p class="eyebrow" lang="tr">Ekran görüntüleri</p>
+      <h2 lang="en">A picture book that moves</h2>
+      <h2 lang="tr">Hareket eden bir resimli kitap</h2>
+    </div>
+    <ul class="shots" aria-label="Screenshots">
+      <li><img src="img/shot-01-title-en.jpg" data-src-en="img/shot-01-title-en.jpg" data-src-tr="img/shot-01-title-tr.jpg" width="1600" height="736" alt="The Wickwing title screen: Tallow stands under a lamp post at dusk" data-alt-tr="Wickwing başlık ekranı: Tallow alacakaranlıkta bir fener direğinin altında"></li>
+      <li><img src="img/shot-02-meadows-en.jpg" data-src-en="img/shot-02-meadows-en.jpg" data-src-tr="img/shot-02-meadows-tr.jpg" width="1600" height="736" alt="Tallow springs to the top of a stone cairn in Thistledown Meadows" data-alt-tr="Tallow, Thistledown Meadows'ta taş bir höyüğün tepesine sıçrıyor"></li>
+      <li><img src="img/shot-03-rookwood-en.jpg" data-src-en="img/shot-03-rookwood-en.jpg" data-src-tr="img/shot-03-rookwood-tr.jpg" width="1600" height="736" loading="lazy" alt="A giant rook chases Tallow through Rookwood at dawn" data-alt-tr="Dev bir karga şafakta Rookwood'da Tallow'u kovalıyor"></li>
+      <li><img src="img/shot-04-glasshollow-en.jpg" data-src-en="img/shot-04-glasshollow-en.jpg" data-src-tr="img/shot-04-glasshollow-tr.jpg" width="1600" height="736" loading="lazy" alt="Tallow's lantern glows under crystal needles in Glasshollow" data-alt-tr="Tallow'un feneri Glasshollow'da kristal iğnelerin altında parlıyor"></li>
+      <li><img src="img/shot-05-cinder-peaks-en.jpg" data-src-en="img/shot-05-cinder-peaks-en.jpg" data-src-tr="img/shot-05-cinder-peaks-tr.jpg" width="1600" height="736" loading="lazy" alt="A volcano erupts over a lava sea as Tallow runs in Cinder Peaks" data-alt-tr="Cinder Peaks'te Tallow koşarken bir yanardağ lav denizinin üstünde patlıyor"></li>
+      <li><img src="img/shot-06-lanternworks-en.jpg" data-src-en="img/shot-06-lanternworks-en.jpg" data-src-tr="img/shot-06-lanternworks-tr.jpg" width="1600" height="736" loading="lazy" alt="Tallow rides a lantern-line past the observatory dome of the Lanternworks" data-alt-tr="Tallow, Lanternworks'ün gözlemevi kubbesinin yanından fener teliyle kayıyor"></li>
+      <li><img src="img/shot-07-great-lantern-en.jpg" data-src-en="img/shot-07-great-lantern-en.jpg" data-src-tr="img/shot-07-great-lantern-tr.jpg" width="1600" height="736" loading="lazy" alt="The Great Lantern blazes at sunrise as Tallow crosses the bridge" data-alt-tr="Tallow köprüden geçerken Büyük Fener gün doğumunda parlıyor"></li>
+      <li><img src="img/shot-08-map-en.jpg" data-src-en="img/shot-08-map-en.jpg" data-src-tr="img/shot-08-map-tr.jpg" width="1600" height="736" loading="lazy" alt="The painted world map of Hollowmere with its five Beacons" data-alt-tr="Hollowmere'in beş Işık Kulesi'yle boyalı dünya haritası"></li>
+    </ul>
+    <div class="wrap"><p class="shots-hint" lang="en">Swipe or scroll sideways for more. Every frame is from the game itself.</p><p class="shots-hint" lang="tr">Devamı için yana kaydır. Her kare oyunun kendisinden.</p></div>
+  </section>
+
+  <section id="worlds" style="padding-top:0">
+    <div class="wrap">
+      <p class="eyebrow" lang="en">The five worlds</p><p class="eyebrow" lang="tr">Beş dünya</p>
+      <h2 lang="en">From golden meadows to the Lanternworks</h2>
+      <h2 lang="tr">Altın çayırlardan Lanternworks'e</h2>
+      <ul class="worlds">
+        <li class="world">
+          <img src="img/world-1.jpg" width="960" height="540" loading="lazy" alt="Tallow springs to the top of a stone cairn in Thistledown Meadows at dusk">
+          <div>
+            <span class="num" lang="en">World 1</span><span class="num" lang="tr">Dünya 1</span>
+            <h3>Thistledown Meadows</h3>
+            <p lang="en">Golden-hour fields, water mills and windmills, and a mill that falls apart around you.</p>
+            <p lang="tr">Altın saatte tarlalar, su ve yel değirmenleri, bir de etrafında çöken bir değirmen.</p>
+            <p class="move" lang="en">New: puffcap springs</p><p class="move" lang="tr">Yeni: mantar yaylar</p>
+          </div>
+        </li>
+        <li class="world">
+          <img src="img/world-2.jpg" width="960" height="540" loading="lazy" alt="Tallow runs from a giant rook through Rookwood at dawn">
+          <div>
+            <span class="num" lang="en">World 2</span><span class="num" lang="tr">Dünya 2</span>
+            <h3>Rookwood</h3>
+            <p lang="en">A moonlit pine forest of fireflies and lantern vines, and a rook chase into the dawn.</p>
+            <p lang="tr">Ateş böcekleri ve fener sarmaşıklarıyla ay ışığında bir çam ormanı, şafağa uzanan bir karga kovalamacası.</p>
+            <p class="move" lang="en">New: wall hops</p><p class="move" lang="tr">Yeni: duvar zıplaması</p>
+          </div>
+        </li>
+        <li class="world">
+          <img src="img/world-3.jpg" width="960" height="540" loading="lazy" alt="Tallow's lantern glows in the crystal caverns of Glasshollow">
+          <div>
+            <span class="num" lang="en">World 3</span><span class="num" lang="tr">Dünya 3</span>
+            <h3>Glasshollow</h3>
+            <p lang="en">Crystal caverns in violet and cyan, a lake like a mirror and a heart of living crystal.</p>
+            <p lang="tr">Mor ve camgöbeği kristal mağaralar, ayna gibi bir göl ve canlı bir kristal kalp.</p>
+            <p class="move" lang="en">New: switches, gates and light bridges</p><p class="move" lang="tr">Yeni: şalterler, kapılar ve ışık köprüleri</p>
+          </div>
+        </li>
+        <li class="world">
+          <img src="img/world-4.jpg" width="960" height="540" loading="lazy" alt="Tallow leaps between stone rafts on a lava sea under a red sun in Cinder Peaks">
+          <div>
+            <span class="num" lang="en">World 4</span><span class="num" lang="tr">Dünya 4</span>
+            <h3>Cinder Peaks</h3>
+            <p lang="en">Ash, basalt and ember rivers, rafts on a lava sea, and an escape from the rising lava.</p>
+            <p lang="tr">Kül, bazalt ve köz nehirleri, lav denizinde sallar ve yükselen lavdan kaçış.</p>
+            <p class="move" lang="en">New: the wing-cloak glide and thermals</p><p class="move" lang="tr">Yeni: kanat pelerinle süzülme ve sıcak hava akımları</p>
+          </div>
+        </li>
+        <li class="world finale">
+          <img src="img/world-5.jpg" width="960" height="540" loading="lazy" alt="Tallow crosses the bridge under the blazing Great Lantern at sunrise">
+          <div>
+            <span class="num" lang="en">World 5 · the finale</span><span class="num" lang="tr">Dünya 5 · final</span>
+            <h3>The Lanternworks</h3>
+            <p lang="en">A clockwork city of brass and ivory, the Great Clock, the Spire, and the Great Lantern itself.</p>
+            <p lang="tr">Pirinç ve fildişinden bir saat işi şehir, Büyük Saat, Kule ve Büyük Fener'in kendisi.</p>
+            <p class="move" lang="en">New: lantern-lines (zip-lines)</p><p class="move" lang="tr">Yeni: fener telleri</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="support" class="support">
+    <div class="wrap">
+      <p class="eyebrow" lang="en">Support</p><p class="eyebrow" lang="tr">Destek</p>
+      <h2 lang="en">Need a hand with the lantern?</h2>
+      <h2 lang="tr">Fenerle ilgili yardım mı lazım?</h2>
+      <div class="support-grid">
+        <div class="contact">
+          <p lang="en">Questions, bugs or ideas: write to us and you will hear back from the developer.</p>
+          <p lang="tr">Soruların, hataların ya da fikirlerin için yaz; cevabı doğrudan geliştiriciden alırsın.</p>
+          <a class="mail" href="mailto:alperenkaraca@msn.com?subject=Wickwing">alperenkaraca@msn.com</a>
+          <p lang="en">Please mention your device (for example iPhone 15 or iPad Air) and the level, if it is about a level.</p>
+          <p lang="tr">Lütfen cihazını (örneğin iPhone 15 ya da iPad Air) ve konu bir bölümse hangi bölüm olduğunu yaz.</p>
+          <p><a href="https://alperenkaraca.github.io/wickwing-privacy/" lang="en">Privacy policy</a><a href="https://alperenkaraca.github.io/wickwing-privacy/" lang="tr">Gizlilik politikası</a></p>
+        </div>
+        <div class="faq">
+          <details lang="en">
+            <summary>Where is my progress saved?</summary>
+            <p>On your device only: completed levels, medallions, best times and settings. Nothing is uploaded and there is no account. Your iPhone or iPad's own iCloud or computer backup includes it; deleting the app deletes your progress.</p>
+          </details>
+          <details lang="tr">
+            <summary>İlerlemem nereye kaydediliyor?</summary>
+            <p>Yalnızca cihazına: bitirdiğin bölümler, madalyonlar, en iyi süreler ve ayarlar. Hiçbir şey yüklenmez, hesap yoktur. iPhone ya da iPad'inin kendi iCloud veya bilgisayar yedeği bunu da içerir; uygulamayı silersen ilerlemen de silinir.</p>
+          </details>
+          <details lang="en">
+            <summary>Which devices does Wickwing run on?</summary>
+            <p>iPhone and iPad, in landscape, with iOS 15 or later. It plays offline and needs no internet connection.</p>
+          </details>
+          <details lang="tr">
+            <summary>Wickwing hangi cihazlarda çalışır?</summary>
+            <p>iOS 15 veya üstü yüklü iPhone ve iPad'de, yatay ekranda. İnternetsiz oynanır, bağlantı gerektirmez.</p>
+          </details>
+          <details lang="en">
+            <summary>How do I send TestFlight feedback?</summary>
+            <ol>
+              <li>While playing, take a screenshot (side button + volume up).</li>
+              <li>Tap the preview, then <em>Share Beta Feedback</em> (or the share button → <em>Share Beta Feedback</em>).</li>
+              <li>Add a few words and send. Or open the TestFlight app → Wickwing → <em>Send Beta Feedback</em>.</li>
+            </ol>
+          </details>
+          <details lang="tr">
+            <summary>TestFlight geri bildirimini nasıl gönderirim?</summary>
+            <ol>
+              <li>Oynarken ekran görüntüsü al (yan tuş + ses açma).</li>
+              <li>Köşedeki önizlemeye dokun, paylaş düğmesinden beta geri bildirimi seçeneğini seç.</li>
+              <li>Birkaç kelime ekleyip gönder. Ya da TestFlight uygulamasını aç, Wickwing'e gir ve oradan geri bildirim gönder.</li>
+            </ol>
+          </details>
+          <details lang="en">
+            <summary>Are there ads or tracking?</summary>
+            <p>No ads, no accounts, no tracking and no analytics. See the <a href="https://alperenkaraca.github.io/wickwing-privacy/">privacy policy</a>.</p>
+          </details>
+          <details lang="tr">
+            <summary>Reklam ya da takip var mı?</summary>
+            <p>Reklam, hesap, takip ve analiz yok. Ayrıntılar <a href="https://alperenkaraca.github.io/wickwing-privacy/">gizlilik politikasında</a>.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Ali Alperen Karaca · Wickwing</span>
+    <nav>
+      <a href="#support" lang="en">Support</a><a href="#support" lang="tr">Destek</a>
+      <a href="https://alperenkaraca.github.io/wickwing-privacy/" lang="en">Privacy</a><a href="https://alperenkaraca.github.io/wickwing-privacy/" lang="tr">Gizlilik</a>
+      <a href="#top" lang="en">Back to top</a><a href="#top" lang="tr">Başa dön</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  // Language toggle (no libraries): EN by default, TR for Turkish browsers or when chosen; the choice is remembered.
+  (function () {
+    var root = document.documentElement;
+    function apply(lang) {
+      root.setAttribute("data-lang", lang);
+      root.setAttribute("lang", lang);
+      document.querySelectorAll("[data-set-lang]").forEach(function (b) {
+        b.setAttribute("aria-pressed", String(b.getAttribute("data-set-lang") === lang));
+      });
+      document.querySelectorAll("img[data-src-" + lang + "]").forEach(function (img) {
+        if (!img.hasAttribute("data-alt-en")) img.setAttribute("data-alt-en", img.alt);
+        img.src = img.getAttribute("data-src-" + lang);
+        img.alt = img.getAttribute("data-alt-" + lang) || img.alt;
+      });
+    }
+    var saved = null;
+    try { saved = localStorage.getItem("wickwing-lang"); } catch (e) {}
+    var lang = saved || ((navigator.language || "").toLowerCase().indexOf("tr") === 0 ? "tr" : "en");
+    apply(lang);
+    document.querySelectorAll("[data-set-lang]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var l = b.getAttribute("data-set-lang");
+        apply(l);
+        try { localStorage.setItem("wickwing-lang", l); } catch (e) {}
+      });
+    });
+    // Reduced motion: the poster stands in for the loop (CSS hides the video; this also stops it downloading and playing).
+    var mq = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+    var video = document.querySelector(".hero video");
+    function motion() {
+      if (!video) return;
+      if (mq && mq.matches) { video.pause(); video.removeAttribute("autoplay"); }
+      else if (video.paused) { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
+    }
+    if (mq) { motion(); if (mq.addEventListener) mq.addEventListener("change", motion); }
+  })();
+</script>
+</body>
+</html>
