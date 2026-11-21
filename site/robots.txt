@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://alperenkaraca.github.io/wickwing/sitemap.xml
